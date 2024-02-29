@@ -38,5 +38,9 @@ public class PersonService {
         return personDAO.selectPersonById(id);
     }
 
+    public int updatePerson(UUID id, Person newPerson){
+        return this.personDAO.updatePersonById(id, newPerson);
+    }
+
 
 }

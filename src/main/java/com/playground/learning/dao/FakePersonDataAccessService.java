@@ -35,5 +35,16 @@ public class FakePersonDataAccessService implements PersonDao{
         return DB.stream().filter(person -> person.getId().equals(id)).findFirst();
     }
 
-
+    @Override
+    public int updatePersonById(UUID id, Person personUpdate) {
+        return (selectPersonById(id)
+                .map(p->{
+                    int indexPersonToUpdate = DB.indexOf(p);
+                    if (indexPersonToUpdate >= 0){
+                        DB.set(indexPersonToUpdate, personUpdate);
+                return 1;
+            }
+            return 0;
+        }).orElse(0));
+    }
 }

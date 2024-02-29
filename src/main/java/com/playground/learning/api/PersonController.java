@@ -35,8 +35,13 @@ public class PersonController {
     }
 
     @GetMapping(path="{id}")
-    public Person getPersonById(@PathVariable("id")UUID id){
+    public Person getPersonById(@PathVariable("id") UUID id){
         return this.personService.selectById(id).orElse(null);
+    }
+
+    @PutMapping(path={"{id}"})
+    public void updatePersonById(@PathVariable("id") UUID id, @RequestBody Person personToUpdate){
+         this.personService.updatePerson(id, personToUpdate);
     }
 
 }
